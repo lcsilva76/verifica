@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Eventos JS</h1>
+
+    <button id="btn1">Chique Aqui!</button>
+    
+        <script>
+        //    document.querySelector('#btn1').onclick = function(){
+        //        alert("Funciona da mesma forma!") }
+        
+        //    document.querySelector('#btn1').onclick = () => alert("Funciona da mesma estranho!") 
+        
+        // document.querySelector('#btn1').addEventListener('click', ()=>{
+            //     alert('Nova forma!')
+            // })
+            
+            let btn1 = document.querySelector('#btn1')
+            
+            btn1.addEventListener('click',clicou)
+            btn1.addEventListener('mouseenter', entrou)
+            btn1.addEventListener('mouseout', saiu)
+            
+            function clicou(){ 
+                btn1.innerHTML = "Clicou não entra e nem sai mais"
+                btn1.removeEventListener('mouseenter',entrou) 
+                btn1.removeEventListener('mouseout',saiu) 
+            }
+            
+            function entrou(){ btn1.innerHTML = "Entrou" }
+            
+            function saiu(){ btn1.innerHTML = "Saiu" }
+            </script>
+
+
+            <h2>Exemplo do foreach</h2>
+        
+            <button class="item">"Clique Aqui"</button><br>
+            <button class="item">"Clique Aqui"</button><br>
+            <button class="item">"Clique Aqui"</button><br>
+            <button class="item">"Clique Aqui"</button><br>
+            <button class="item">"Clique Aqui"</button><br>
+            <button class="item">"Clique Aqui"</button><br>
+            <button class="item">"Clique Aqui"</button><br>
+            <button class="item">"Clique Aqui"</button><br>
+        
+            <script>
+                let botoes = document.querySelectorAll('.item')
+
+                botoes.forEach( item =>{
+                    item.addEventListener('click',()=>{ console.log("clicou");
+                    })
+                })
+            </script>
+
+            <div id="div1">Exemplos com o mouse</div>
+            <span></span>
+            <style>
+                #div1{
+                    width: 200px; height: 150px; color: white; display: flex;
+                    justify-content: center; align-items: center; 
+                    background-color: gray; font-family: Arial, Helvetica, sans-serif;
+                }
+            </style>
+
+            <script>
+                let div1 = document.querySelector('#div1')
+                div1.addEventListener('mouseenter',entrar)
+                div1.addEventListener('mouseout',sair)
+                // div1.addEventListener('click',clicar)
+                div1.addEventListener('contextmenu',clickDireito)
+                div1.addEventListener('dblclick',clickDuplo)
+                div1.addEventListener('mousemove',mover)
+                div1.addEventListener('mousedown',apertar)
+                div1.addEventListener('mouseup',soltar)
+
+
+                function entrar(){
+                    div1.innerHTML = 'Você tá dentro'
+                    div1.style.background = 'blue'
+                }
+
+                function sair(){
+                    div1.innerHTML = 'Você tá fora'
+                    div1.style.background = 'green'
+                }
+
+                function clicar(){
+                    div1.innerHTML = 'Você clicou'
+                    div1.style.background = 'orange'
+                }
+                
+                function clickDireito(){
+                    event.preventDefault()
+                    div1.innerHTML = 'click Direito'
+                    div1.style.background = 'pink'
+                }
+                
+                function clickDuplo(){
+                    div1.innerHTML = 'click Duplo'
+                    div1.style.background = 'red'
+                }
+                
+                function mover(){
+                    // let x = event.clientX-this.offsetLeft
+                    // let y = event.clientY-this.offsetTop
+                    let x = event.clientX
+                    let y = event.clientY
+                    
+                    let res = document.querySelector('span')
+                    res.innerHTML = `Posição X: ${x} e Y: ${y}`
+                    
+                }
+                
+                function apertar(){
+                    div1.innerHTML = 'Apertou'
+                    div1.style.background = 'aqua'
+                }
+                
+                function soltar(){
+                    div1.innerHTML = 'Soutou'
+                    div1.style.background = 'lime'
+                }
+
+            </script>
+
+            <h2>Exemplos com teclado</h2>
+            <label for="">Digite um texto</label>
+            <input type="text" id="texto">
+            <p>Resposta: <span id="resp"></span></p>
+
+            <script>
+                let texto = document.querySelector('#texto')
+                let res = document.querySelector('#resp')
+
+                // texto.addEventListener('keydown',()=>{
+                //     resp.innerHTML = texto.value
+                // })
+
+                texto.addEventListener('keyup',()=>{
+                    resp.innerHTML = `O número da tecla apertada é: ${event.keyCode}`
+                    
+                })
+
+
+                let px = 0
+                let py = 0
+                document.addEventListener('keyup', mexer)
+
+                function mexer(){
+                    div1.style.position = 'relative'
+                    let tecla = event.keyCode
+
+                    if(tecla == 37){
+                        px -= 10;
+                        div1.style.left = px+"px"
+                        div1.innerHTML = event.key
+                    }else if(tecla == 38){
+                        py -= 10;
+                        div1.style.top = py+"px"
+                        div1.innerHTML = event.key
+                    }else if(tecla == 39){
+                        px += 10;
+                        div1.style.left = px+"px"
+                        div1.innerHTML = event.key
+                    }else if(tecla == 40){
+                        py += 10;
+                        div1.style.top = py+"px"
+                        div1.innerHTML = event.key
+                    }
+                }
+
+                </script>
+
+            <h2>Eventos com formulário</h2>
+            
+</body>
+</html>
